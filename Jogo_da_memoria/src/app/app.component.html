@@ -1,0 +1,42 @@
+<audio id="backtrack">
+  <source src="../assets/musics/empty_dreams.mp3" type="audio/mpeg">
+</audio>
+<div id="body">
+  <div class="card-row">
+    <app-card/>
+    <app-card/>
+    <app-card/>
+    <app-card/>
+  </div>
+  <div class="card-row">
+    <app-card/>
+    <app-card/>
+    <app-card/>
+    <app-card/>
+  </div>
+  <div class="card-row">
+    <app-card/>
+    <app-card/>
+    <app-card/>
+    <app-card/>
+  </div>
+</div>
+
+<style scoped lang="scss">
+#backtrack {
+  display: none;
+}
+#body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 50px;
+}
+.card-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 10px 0;
+}
+
+</style>
