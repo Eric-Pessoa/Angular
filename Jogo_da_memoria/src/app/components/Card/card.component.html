@@ -1,22 +1,22 @@
-<div class="flip-card" >
+  <div class="flip-card" >
     <div class="flip-card-inner">
         <div class="flip-card-front">
             <img src="../../../assets/images/back_of_card.png" style="width:180px;height:250px;">
         </div>
-        <div class="flip-card-back">
-            <h1>John Doe</h1>
-            <p>Architect & Engineer</p>
-            <p>We love that guy</p>
-        </div>
+        <div class="flip-card-back"></div>
     </div>
-</div>
+  </div>
 
 
   
 <style scoped lang="scss">
 
-.teste {
-    transform: rotateY(180deg);
+.flipBack {
+  transform: rotateY(0deg)
+}
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip {
+  transform: rotateY(180deg);
 }
 
 .flip-card {
@@ -33,11 +33,6 @@
   text-align: center;
   transition: transform 0.6s;
   transform-style: preserve-3d;
-}
-
-/* Do an horizontal flip when you move the mouse over the flip box container */
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
 }
 
 /* Position the front and back side */
