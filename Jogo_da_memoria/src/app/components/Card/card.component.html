@@ -3,7 +3,9 @@
         <div class="flip-card-front">
             <img src="../../../assets/images/back_of_card.png" style="width:180px;height:250px;">
         </div>
-        <div class="flip-card-back"></div>
+        <div class="flip-card-back">
+          <img [src]="imgSrc" style="width:70px;height:70px;">
+        </div>
     </div>
   </div>
 
@@ -52,6 +54,9 @@
 
 /* Style the back side */
 .flip-card-back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: dodgerblue;
   color: white;
   transform: rotateY(180deg);
