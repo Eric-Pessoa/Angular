@@ -6,7 +6,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class CardComponent  {
 
-  @Input() itemId = 0; 
+  @Input() imageId = 0; 
   @Output() clickedCard = new EventEmitter<string>();
 
   imgSrc = '';
@@ -24,7 +24,7 @@ export class CardComponent  {
   }
 
   defineImage() {
-    switch(this.itemId) {
+    switch(this.imageId) {
       case 1:
         this.imgSrc = 'glass_losangle'
         break;
