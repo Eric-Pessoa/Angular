@@ -21,22 +21,27 @@ export class AppComponent {
   }
 
   checkIfMatches(cardName: string) {
-    
     if(cardName !== this.latestCardReceived) {
-      this.callCloseAllAnimation();
+      this.latestCardReceived = ''
+      setTimeout(() => {
+        this.callCloseAllAnimation();
+      }, 1500);
     } else {
-      console.log('entrei, é igual')
+      console.log('tá igual')
+      this.successfulPair(cardName)
     }
   }
 
-  /*Simulates a click in a specific card*/
-  clickSpecificCard(cardId: string) {
-    const card = document.getElementById(cardId)
-    console.log(card)
-    if(card !== null) {
-      card.click()
+  successfulPair(cardName: string): void {
+    const cards = document.getElementsByClassName(`flip-card ${cardName}`);
+    for (let index = 0; index < cards.length; index++) {
+      const card = cards[index];
+      card.classList.remove('flip')
+      card.classList.remove('flipBack')
+      card.classList.add('immutable')
+    }
   }
-  }
+
 
   /*Animations */
   defineOpenAnimation(): void {
@@ -58,10 +63,8 @@ export class AppComponent {
     for (let index = 0; index < cards.length; index++) {
       const card = cards[index];
       const innerCard = card.getElementsByClassName('flip-card-inner')[0]
-      if(innerCard.classList.contains('flip')){
-        innerCard.classList.remove('flip')
-        innerCard.classList.add('flipBack')
-      } 
+      innerCard.classList.add('flipBack')
+      innerCard.classList.remove('flip')
     }
   }
 

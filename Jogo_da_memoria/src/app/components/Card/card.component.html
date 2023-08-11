@@ -1,4 +1,4 @@
-  <div class="flip-card" (click)="emitClickedCard()">
+  <div [class]="imgSrc" class="flip-card" (click)="emitClickedCard()">
     <div class="flip-card-inner">
         <div class="flip-card-front">
             <img src="../../../assets/images/back_of_card.png" style="width:180px;height:250px;">
@@ -12,6 +12,10 @@
 
   
 <style scoped lang="scss">
+
+.immutable {
+  pointer-events: none;
+}
 
 .flipBack {
   transform: rotateY(0deg)
