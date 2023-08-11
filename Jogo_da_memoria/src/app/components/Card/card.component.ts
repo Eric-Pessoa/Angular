@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -7,31 +7,41 @@ import { Component, Input } from '@angular/core';
 export class CardComponent  {
 
   @Input() itemId = 0; 
+  @Output() clickedCard = new EventEmitter<string>();
+
   imgSrc = '';
 
   ngOnInit() {
     this.defineImage();
   }
 
+  emitClickedCard() {
+    this.clickedCard.emit(this.imgSrc)
+  }
+
+  getPathToImage() {
+    return `../../../assets/images/shapes/${this.imgSrc}.png`
+  }
+
   defineImage() {
     switch(this.itemId) {
       case 1:
-        this.imgSrc = '../../../assets/images/shapes/glass_losangle.png'
+        this.imgSrc = 'glass_losangle'
         break;
       case 2:
-        this.imgSrc = '../../../assets/images/shapes/crescent_moon.png'
+        this.imgSrc = 'crescent_moon'
         break;
       case 3:
-        this.imgSrc = '../../../assets/images/shapes/orange_half_circle.png'
+        this.imgSrc = 'orange_half_circle'
         break;
       case 4:
-        this.imgSrc = '../../../assets/images/shapes/purple_circle.png'
+        this.imgSrc = 'purple_circle'
         break;
       case 5:
-        this.imgSrc = '../../../assets/images/shapes/red_triangle.png'
+        this.imgSrc = 'red_triangle'
         break;
       case 6:
-        this.imgSrc = '../../../assets/images/shapes/yellow_square.png'
+        this.imgSrc = 'yellow_square'
         break;
     }
   }

@@ -7,10 +7,29 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Jogo_da_memoria';
   idNumbers: number[] = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6]
+
+  mostRecentCard: string = ''
+
+
   ngOnInit() {
     this.defineAnimation()
     this.shuffleArrayOfIdsOrder(this.idNumbers)
   }
+
+  receiveClickedCard(receivedCard: string) {
+    this.checkIfMatches(receivedCard)
+    this.mostRecentCard = receivedCard;
+  }
+
+  checkIfMatches(receivedCard: string) {
+    console.log(receivedCard);
+    console.log(this.mostRecentCard)
+    if(receivedCard === this.mostRecentCard) {
+      console.log('foi')
+    }
+
+  }
+
   defineAnimation(): void {
     const cards = document.getElementsByClassName("flip-card");
     for (let index = 0; index < cards.length; index++) {
