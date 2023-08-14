@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CardData } from './components/Card/card.component';
 
 @Component({
   selector: 'app-root',
@@ -8,27 +9,28 @@ export class AppComponent {
   title = 'Jogo_da_memoria';
   idNumbers: number[] = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6]
 
-  latestCardReceived: string | undefined = undefined
+  latestCardInfo: CardData  = {id: '', img: ''}
 
   ngOnInit() {
     this.defineOpenAnimation()
     this.shuffleArrayOfIdsOrder()
   }
 
-  receiveClickedCard(cardName: string) {
-    this.checkIfMatches(cardName)
-    this.latestCardReceived = cardName
+  receiveClickedCard(cardInfo: CardData) {
+    this.checkIfMatches(cardInfo)
+    this.latestCardInfo.id = cardInfo.id
+    this.latestCardInfo.img = cardInfo.img
   }
 
-  checkIfMatches(cardName: string) {
-    if(cardName !== this.latestCardReceived) {
-      this.latestCardReceived = undefined
+  checkIfMatches(cardInfo: CardData) {
+    if(cardInfo.img !== this.latestCardInfo.img) {
+      this.latestCardInfo = {id: '', img: ''}
       setTimeout(() => {
         this.callCloseAllAnimation();
       }, 1500);
     } else {
       console.log('tá igual')
-      this.successfulPair(cardName)
+      this.successfulPair(cardInfo.img)
     }
   }
 

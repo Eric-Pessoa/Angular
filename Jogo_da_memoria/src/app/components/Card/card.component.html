@@ -1,4 +1,4 @@
-  <div [class]="imgSrc" class="flip-card" (click)="emitClickedCard()">
+  <div [id]="cardId" [class]="imgSrc" class="flip-card" (click)="emitClickedCard($event)">
     <div class="flip-card-inner">
         <div class="flip-card-front">
             <img src="../../../assets/images/back_of_card.png" style="width:180px;height:250px;">

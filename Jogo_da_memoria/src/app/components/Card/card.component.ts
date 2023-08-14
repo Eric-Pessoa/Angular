@@ -1,13 +1,20 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
+export interface CardData {
+  id: string;
+  img: string;
+}
+
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
 })
+
 export class CardComponent  {
 
   @Input() imageId = 0; 
-  @Output() clickedCard = new EventEmitter<string>();
+  @Input() cardId = '';
+  @Output() clickedCard = new EventEmitter<CardData>();
 
   imgSrc = '';
 
@@ -15,8 +22,9 @@ export class CardComponent  {
     this.defineImage();
   }
 
-  emitClickedCard() {
-    this.clickedCard.emit(this.imgSrc)
+  emitClickedCard(e: MouseEvent) {
+    const cardId = (e.currentTarget as Element).id
+    this.clickedCard.emit({id: cardId, img: this.imgSrc})
   }
 
   getPathToImage() {
