@@ -19,19 +19,21 @@ export class AppComponent {
 
   updateNumberOfOpenedCards() {
     const cards = document.getElementsByClassName("flip");
-    this.numberOfOpenCards = cards.length + 1;
+    const concludedCards = document.getElementsByClassName("immutable");
+    this.numberOfOpenCards = ((cards.length + 1) - concludedCards.length) 
   }
 
   receiveClickedCard(cardInfo: CardData) {
     this.updateNumberOfOpenedCards();
     this.checkIfMatches(cardInfo)
-    this.latestCardInfo.id = cardInfo.id
-    this.latestCardInfo.img = cardInfo.img
+    if(this.numberOfOpenCards <= 2 && cardInfo.id !== this.latestCardInfo.id) {
+      this.latestCardInfo.id = cardInfo.id
+      this.latestCardInfo.img = cardInfo.img
+    }
   }
 
   checkIfMatches(cardInfo: CardData) {
     if(cardInfo.id === this.latestCardInfo.id) {
-      console.log('igualllll')
       return;
     }
     if(cardInfo.img !== this.latestCardInfo.img) {
@@ -44,7 +46,7 @@ export class AppComponent {
       console.log('tá igual')
       setTimeout(() => {
         this.successfulPair(cardInfo.img)
-      }, 1000);
+      }, 1500);
     }
   }
 
@@ -52,9 +54,6 @@ export class AppComponent {
     const cards = document.getElementsByClassName(`flip-card ${cardName}`);
     for (let index = 0; index < cards.length; index++) {
       const card = cards[index];
-      const innerCard = card.getElementsByClassName('flip-card-inner')[0]
-      card.classList.remove('flip')
-      card.classList.remove('flipBack')
       card.classList.add('immutable')
     }
   }
