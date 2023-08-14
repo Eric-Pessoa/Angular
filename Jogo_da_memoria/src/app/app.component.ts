@@ -8,11 +8,11 @@ export class AppComponent {
   title = 'Jogo_da_memoria';
   idNumbers: number[] = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6]
 
-  latestCardReceived: string = ''
+  latestCardReceived: string | undefined = undefined
 
   ngOnInit() {
     this.defineOpenAnimation()
-    this.shuffleArrayOfIdsOrder(this.idNumbers)
+    this.shuffleArrayOfIdsOrder()
   }
 
   receiveClickedCard(cardName: string) {
@@ -22,7 +22,7 @@ export class AppComponent {
 
   checkIfMatches(cardName: string) {
     if(cardName !== this.latestCardReceived) {
-      this.latestCardReceived = ''
+      this.latestCardReceived = undefined
       setTimeout(() => {
         this.callCloseAllAnimation();
       }, 1500);
@@ -48,12 +48,13 @@ export class AppComponent {
     const cards = document.getElementsByClassName("flip-card");
     for (let index = 0; index < cards.length; index++) {
       const card = cards[index];
-      card.addEventListener('click', () => {
-        const innerCard = card.getElementsByClassName('flip-card-inner')[0]
-        if(!(innerCard.classList.contains('flip'))){
+      card.addEventListener('click', (e) => {
+        const cardHigherLevel = e.currentTarget as Element
+        if(!(cardHigherLevel.classList.contains('immutable'))) {
+          const innerCard = card.getElementsByClassName('flip-card-inner')[0]
           innerCard.classList.remove('flipBack')
           innerCard.classList.add('flip')
-        } 
+        }
       })
     }
   }
@@ -62,19 +63,21 @@ export class AppComponent {
     const cards = document.getElementsByClassName("flip-card");
     for (let index = 0; index < cards.length; index++) {
       const card = cards[index];
+      if(!(card.classList.contains('immutable'))) {
       const innerCard = card.getElementsByClassName('flip-card-inner')[0]
-      innerCard.classList.add('flipBack')
       innerCard.classList.remove('flip')
+      innerCard.classList.add('flipBack')
+      }
     }
   }
 
   /*Randomizes the order of the array */
-   shuffleArrayOfIdsOrder(array: number[]) {
-    for (var i = array.length - 1; i > 0; i--) {
+   shuffleArrayOfIdsOrder() {
+    for (var i = this.idNumbers.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+        var temp = this.idNumbers[i];
+        this.idNumbers[i] = this.idNumbers[j];
+        this.idNumbers[j] = temp;
     }
   }
 }
