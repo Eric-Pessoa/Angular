@@ -10,27 +10,41 @@ export class AppComponent {
   idNumbers: number[] = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6]
 
   latestCardInfo: CardData  = {id: '', img: ''}
+  numberOfOpenCards = 0;
 
   ngOnInit() {
     this.defineOpenAnimation()
     this.shuffleArrayOfIdsOrder()
   }
 
+  updateNumberOfOpenedCards() {
+    const cards = document.getElementsByClassName("flip");
+    this.numberOfOpenCards = cards.length + 1;
+  }
+
   receiveClickedCard(cardInfo: CardData) {
+    this.updateNumberOfOpenedCards();
     this.checkIfMatches(cardInfo)
     this.latestCardInfo.id = cardInfo.id
     this.latestCardInfo.img = cardInfo.img
   }
 
   checkIfMatches(cardInfo: CardData) {
+    if(cardInfo.id === this.latestCardInfo.id) {
+      console.log('igualllll')
+      return;
+    }
     if(cardInfo.img !== this.latestCardInfo.img) {
-      this.latestCardInfo = {id: '', img: ''}
-      setTimeout(() => {
-        this.callCloseAllAnimation();
-      }, 1500);
+      if(this.numberOfOpenCards === 2) {
+        setTimeout(() => {
+          this.callCloseAllAnimation();
+        }, 1500);
+      }
     } else {
       console.log('tá igual')
-      this.successfulPair(cardInfo.img)
+      setTimeout(() => {
+        this.successfulPair(cardInfo.img)
+      }, 1000);
     }
   }
 
@@ -38,6 +52,7 @@ export class AppComponent {
     const cards = document.getElementsByClassName(`flip-card ${cardName}`);
     for (let index = 0; index < cards.length; index++) {
       const card = cards[index];
+      const innerCard = card.getElementsByClassName('flip-card-inner')[0]
       card.classList.remove('flip')
       card.classList.remove('flipBack')
       card.classList.add('immutable')
@@ -52,7 +67,7 @@ export class AppComponent {
       const card = cards[index];
       card.addEventListener('click', (e) => {
         const cardHigherLevel = e.currentTarget as Element
-        if(!(cardHigherLevel.classList.contains('immutable'))) {
+        if(!(cardHigherLevel.classList.contains('immutable')) && this.numberOfOpenCards <= 2) {
           const innerCard = card.getElementsByClassName('flip-card-inner')[0]
           innerCard.classList.remove('flipBack')
           innerCard.classList.add('flip')

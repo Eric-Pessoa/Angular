@@ -3,7 +3,6 @@
 </audio>
 <div id="body">
   <div id="card-container">
-    {{latestCardInfo.id + latestCardInfo.img}}
     <app-card cardId="1" [imageId] = idNumbers[0] (clickedCard)="receiveClickedCard($event)"/>
     <app-card cardId="2" [imageId] = idNumbers[1] (clickedCard)="receiveClickedCard($event)"/>
     <app-card cardId="3" [imageId] = idNumbers[2] (clickedCard)="receiveClickedCard($event)"/>
