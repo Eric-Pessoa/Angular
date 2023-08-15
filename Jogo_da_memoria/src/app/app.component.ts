@@ -11,6 +11,16 @@ export class AppComponent {
 
   latestCardInfo: CardData  = {id: 0, img: ''}
   numberOfOpenCards = 0;
+  cardsFlipped = 0;
+  userWon = false;
+
+  ngDoCheck() {
+    if(this.cardsFlipped === 11) {
+      setTimeout(() => {
+        this.userWon = true;
+      }, 1000);
+    }
+  }
 
   ngOnInit() {
     this.shuffleArrayOfIdsOrder()
@@ -20,9 +30,9 @@ export class AppComponent {
   }
 
   updateNumberOfOpenedCards() {
-    const cards = document.getElementsByClassName("flip");
+    this.cardsFlipped = document.getElementsByClassName("flip").length;
     const concludedCards = document.getElementsByClassName("immutable");
-    this.numberOfOpenCards = ((cards.length + 1) - concludedCards.length) 
+    this.numberOfOpenCards = ((this.cardsFlipped + 1) - concludedCards.length) 
   }
 
   receiveClickedCard(cardInfo: CardData) {

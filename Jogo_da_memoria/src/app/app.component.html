@@ -1,9 +1,12 @@
 <audio id="backtrack" src="../assets/sounds/musics/empty_dreams.mp3" autoplay></audio>
 <div id="body">
-  <div id="card-container">
-    <div *ngFor="let card of idNumbers; let i = index">
+  <div id="card-container" *ngIf="!userWon">
+    <ng-container *ngFor="let card of idNumbers; let i = index">
       <app-card [cardId]="i + 1" [imageId] = card (clickedCard)="receiveClickedCard($event)"/>
-    </div>
+    </ng-container>
+  </div>
+  <div id="victory_screen" *ngIf="userWon">
+    <p id="victory_text">Você venceu!</p>
   </div>
 </div>
 
@@ -15,17 +18,31 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding:20px;
   height: 100vh;
-  background-color: #dbfbd0;
 }
 #card-container {
+  padding:20px;
   display: flex; 
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: space-around;
   height: inherit;
+  background-color: #dbfbd0;
+}
+#victory_screen {
+  padding:20px;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: darkorchid;
+}
+#victory_text {
+  font-size: 7em;
+  font-family: monospace;
+  color: whitesmoke;
 }
 
 </style>
