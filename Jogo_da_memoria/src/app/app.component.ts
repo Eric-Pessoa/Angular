@@ -37,16 +37,17 @@ export class AppComponent {
   }
 
   checkIfMatches(cardInfo: CardData) {
-    if(cardInfo.img !== this.latestCardInfo.img) {
-      if(this.numberOfOpenCards === 2) {
+    if(this.numberOfOpenCards === 2) {
+      if(cardInfo.img !== this.latestCardInfo.img) {
+          setTimeout(() => {
+            this.callCloseAllAnimation();
+          }, 700);
+        
+      } else {
         setTimeout(() => {
-          this.callCloseAllAnimation();
-        }, 1500);
+          this.defineSuccessfulPair(cardInfo.img)
+        }, 700);
       }
-    } else {
-      setTimeout(() => {
-        this.defineSuccessfulPair(cardInfo.img)
-      }, 1500);
     }
   }
 
