@@ -26,18 +26,17 @@ export class AppComponent {
   }
 
   receiveClickedCard(cardInfo: CardData) {
-    this.updateNumberOfOpenedCards();
-    this.checkIfMatches(cardInfo)
-    if(this.numberOfOpenCards <= 2 && cardInfo.id !== this.latestCardInfo.id) {
-      this.latestCardInfo.id = cardInfo.id
-      this.latestCardInfo.img = cardInfo.img
+    if(cardInfo.id !== this.latestCardInfo.id) {
+      this.updateNumberOfOpenedCards();
+      this.checkIfMatches(cardInfo)
+      if(this.numberOfOpenCards <= 2 ) {
+        this.latestCardInfo.id = cardInfo.id
+        this.latestCardInfo.img = cardInfo.img
+      }
     }
   }
 
   checkIfMatches(cardInfo: CardData) {
-    if(cardInfo.id === this.latestCardInfo.id) {
-      return;
-    }
     if(cardInfo.img !== this.latestCardInfo.img) {
       if(this.numberOfOpenCards === 2) {
         setTimeout(() => {
