@@ -43,7 +43,6 @@ export class AppComponent {
         }, 1500);
       }
     } else {
-      console.log('tá igual')
       setTimeout(() => {
         this.successfulPair(cardInfo.img)
       }, 1500);
