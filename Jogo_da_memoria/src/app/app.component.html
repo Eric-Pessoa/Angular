@@ -3,7 +3,7 @@
 <div id="body">
   <div id="card-container" *ngIf="!userWon">
     <ng-container *ngFor="let card of idNumbers; let i = index">
-      <app-card [cardId]="i + 1" [imageId] = card (clickedCard)="receiveClickedCard($event)"/>
+      <app-card [cardId]="i + 1" [imageId] ="card" (clickedCard)="receiveClickedCard($event)"/>
     </ng-container>
   </div>
   <div id="victory_screen" *ngIf="userWon">
@@ -45,5 +45,4 @@
   font-family: monospace;
   color: whitesmoke;
 }
-
 </style>

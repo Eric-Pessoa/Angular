@@ -6,14 +6,20 @@ import { CardData } from './components/Card/card.component';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  title = 'Jogo_da_memoria';
+  /*Variables */
   idNumbers: number[] = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6]
-
   latestCardInfo: CardData  = {id: 0, img: ''}
   numberOfOpenCards = 0;
   cardsFlipped = 0;
   userWon = false;
 
+  /*Lifecycle hooks */
+  ngOnInit() {
+    this.shuffleArrayOfIdsOrder()
+  }
+  ngAfterViewInit() {
+    this.defineOpenAnimation()
+  }
   ngDoCheck() {
     if(this.cardsFlipped === 11) {
       setTimeout(() => {
@@ -23,19 +29,7 @@ export class AppComponent {
     }
   }
 
-  ngOnInit() {
-    this.shuffleArrayOfIdsOrder()
-  }
-  ngAfterViewInit() {
-    this.defineOpenAnimation()
-  }
-
-  updateNumberOfOpenedCards() {
-    this.cardsFlipped = document.getElementsByClassName("flip").length;
-    const concludedCards = document.getElementsByClassName("immutable");
-    this.numberOfOpenCards = ((this.cardsFlipped + 1) - concludedCards.length) 
-  }
-
+  /*Game logic */
   receiveClickedCard(cardInfo: CardData) {
     if(cardInfo.id !== this.latestCardInfo.id) {
       this.updateNumberOfOpenedCards();
@@ -46,7 +40,11 @@ export class AppComponent {
       }
     }
   }
-
+  updateNumberOfOpenedCards() {
+    this.cardsFlipped = document.getElementsByClassName("flip").length;
+    const concludedCards = document.getElementsByClassName("immutable");
+    this.numberOfOpenCards = ((this.cardsFlipped + 1) - concludedCards.length) 
+  }
   checkIfMatches(cardInfo: CardData) {
     if(this.numberOfOpenCards === 2) {
       if(cardInfo.img !== this.latestCardInfo.img) {
@@ -61,10 +59,9 @@ export class AppComponent {
       }
     }
   }
-
   defineSuccessfulPair(cardName: string): void {
     const cards = document.getElementsByClassName(`flip-card ${cardName}`);
-    for (let index = 0; index < cards.length; index++) {
+    for (let index = 0; index < 2; index++) {
       const card = cards[index];
       card.classList.add('immutable')
     }
@@ -86,7 +83,6 @@ export class AppComponent {
       })
     }
   }
-
   callCloseAllAnimation(): void {
     const cards = document.getElementsByClassName("flip-card");
     for (let index = 0; index < cards.length; index++) {
@@ -108,7 +104,7 @@ export class AppComponent {
         this.idNumbers[j] = temp;
     }
   }
-
+  
   /*Song played when you win*/
   playVictorySong() {
     //Stops default song
