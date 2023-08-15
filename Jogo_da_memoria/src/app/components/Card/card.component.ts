@@ -22,7 +22,13 @@ export class CardComponent  {
     this.defineImage();
   }
 
+  playSoundEffect() {
+    const vid = document.getElementsByClassName('sound_effect')[0] as HTMLVideoElement;
+    vid.play();
+  }
+
   emitClickedCard(e: MouseEvent) {
+    this.playSoundEffect();
     const cardId = Number((e.currentTarget as Element).id)
     this.clickedCard.emit({id: cardId, img: this.imgSrc})
   }
