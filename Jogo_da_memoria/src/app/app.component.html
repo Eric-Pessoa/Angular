@@ -1,4 +1,5 @@
-<audio id="backtrack" src="../assets/sounds/musics/empty_dreams.mp3" autoplay></audio>
+<audio class="backtrack" src="../assets/sounds/musics/empty_dreams.mp3" autoplay></audio>
+<audio class="backtrack" src="../assets/sounds/musics/victory_song.mp3"></audio>
 <div id="body">
   <div id="card-container" *ngIf="!userWon">
     <ng-container *ngFor="let card of idNumbers; let i = index">
@@ -11,7 +12,7 @@
 </div>
 
 <style scoped lang="scss">
-#backtrack {
+.backtrack {
   display: none;
 }
 #body {

@@ -18,6 +18,7 @@ export class AppComponent {
     if(this.cardsFlipped === 11) {
       setTimeout(() => {
         this.userWon = true;
+        this.playVictorySong();
       }, 1000);
     }
   }
@@ -106,5 +107,15 @@ export class AppComponent {
         this.idNumbers[i] = this.idNumbers[j];
         this.idNumbers[j] = temp;
     }
+  }
+
+  /*Song played when you win*/
+  playVictorySong() {
+    //Stops default song
+    const vid1 = document.getElementsByClassName('backtrack')[0] as HTMLVideoElement;
+    vid1.pause();
+    //Starts victory song
+    const vid2 = document.getElementsByClassName('backtrack')[1] as HTMLVideoElement;
+    vid2.play();
   }
 }
