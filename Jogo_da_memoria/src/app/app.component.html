@@ -3,18 +3,9 @@
 </audio>
 <div id="body">
   <div id="card-container">
-    <app-card cardId="1" [imageId] = idNumbers[0] (clickedCard)="receiveClickedCard($event)"/>
-    <app-card cardId="2" [imageId] = idNumbers[1] (clickedCard)="receiveClickedCard($event)"/>
-    <app-card cardId="3" [imageId] = idNumbers[2] (clickedCard)="receiveClickedCard($event)"/>
-    <app-card cardId="4" [imageId] = idNumbers[3] (clickedCard)="receiveClickedCard($event)"/>
-    <app-card cardId="5" [imageId] = idNumbers[4] (clickedCard)="receiveClickedCard($event)"/>
-    <app-card cardId="6" [imageId] = idNumbers[5] (clickedCard)="receiveClickedCard($event)"/>
-    <app-card cardId="7" [imageId] = idNumbers[6] (clickedCard)="receiveClickedCard($event)"/>
-    <app-card cardId="8" [imageId] = idNumbers[7] (clickedCard)="receiveClickedCard($event)"/>
-    <app-card cardId="9" [imageId] = idNumbers[8] (clickedCard)="receiveClickedCard($event)"/>
-    <app-card cardId="10" [imageId] = idNumbers[9] (clickedCard)="receiveClickedCard($event)"/>
-    <app-card cardId="11" [imageId] = idNumbers[10] (clickedCard)="receiveClickedCard($event)"/>
-    <app-card cardId="12" [imageId] = idNumbers[11] (clickedCard)="receiveClickedCard($event)"/>
+    <div *ngFor="let card of idNumbers; let i = index">
+      <app-card [cardId]="i + 1" [imageId] = idNumbers[card] (clickedCard)="receiveClickedCard($event)"/>
+    </div>
   </div>
 </div>
 

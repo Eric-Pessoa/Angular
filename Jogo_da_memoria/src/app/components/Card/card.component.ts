@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 export interface CardData {
-  id: string;
+  id: number;
   img: string;
 }
 
@@ -13,7 +13,7 @@ export interface CardData {
 export class CardComponent  {
 
   @Input() imageId = 0; 
-  @Input() cardId = '';
+  @Input() cardId = 0;
   @Output() clickedCard = new EventEmitter<CardData>();
 
   imgSrc = '';
@@ -23,7 +23,7 @@ export class CardComponent  {
   }
 
   emitClickedCard(e: MouseEvent) {
-    const cardId = (e.currentTarget as Element).id
+    const cardId = Number((e.currentTarget as Element).id)
     this.clickedCard.emit({id: cardId, img: this.imgSrc})
   }
 

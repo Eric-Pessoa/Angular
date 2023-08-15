@@ -9,12 +9,14 @@ export class AppComponent {
   title = 'Jogo_da_memoria';
   idNumbers: number[] = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6]
 
-  latestCardInfo: CardData  = {id: '', img: ''}
+  latestCardInfo: CardData  = {id: 0, img: ''}
   numberOfOpenCards = 0;
 
   ngOnInit() {
-    this.defineOpenAnimation()
     this.shuffleArrayOfIdsOrder()
+  }
+  ngAfterViewInit() {
+    this.defineOpenAnimation()
   }
 
   updateNumberOfOpenedCards() {
@@ -44,12 +46,12 @@ export class AppComponent {
       }
     } else {
       setTimeout(() => {
-        this.successfulPair(cardInfo.img)
+        this.defineSuccessfulPair(cardInfo.img)
       }, 1500);
     }
   }
 
-  successfulPair(cardName: string): void {
+  defineSuccessfulPair(cardName: string): void {
     const cards = document.getElementsByClassName(`flip-card ${cardName}`);
     for (let index = 0; index < cards.length; index++) {
       const card = cards[index];
