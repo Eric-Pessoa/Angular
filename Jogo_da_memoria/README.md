@@ -1,6 +1,7 @@
-# JogoDaMemoria
+# Jogo da memória
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.7.
+Criei esse projeto com o Angular-cli. Rode ng serve para conseguir jogar em um browser.
+Esse foi um projeto básico, para começar a conhecer a linguagem Angular.
 
 ## Development server
 
