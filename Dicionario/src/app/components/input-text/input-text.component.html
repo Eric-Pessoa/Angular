@@ -2,4 +2,4 @@
     <mat-label>Escolha uma palavra</mat-label>
     <input matInput>
 </mat-form-field> -->
-<input type="text" />
+<input type="text" [value]="inputValue" (input)="emitValue($event)" />
